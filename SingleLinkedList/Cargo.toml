@@ -1,0 +1,8 @@
+[package]
+name = "SingleLinkedList"
+version = "0.1.0"
+edition = "2024"
+description = "An educational implementation of a singly linked list in Rust"
+license = "MIT"
+
+[dependencies]
