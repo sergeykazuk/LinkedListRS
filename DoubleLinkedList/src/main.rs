@@ -9,4 +9,11 @@ fn main() {
     dl.add_value(&24);
     dl.print_all();
     dl.print_all_backwards();
+
+    dl.remove_value(&3);
+    dl.print_all();
+
+    dl.remove_value(&45);
+    dl.print_all();
+
 }

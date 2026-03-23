@@ -58,35 +58,45 @@ impl<T: PartialEq + Display + Clone> DoubleLinkedList<T> {
         self.size += 1;
     }
 
-    // pub fn remove_value(&mut self, val: &T) {
-    //     if self.size == 0 {
-    //         println!("List is empty.");
-    //         return;
-    //     }
-        
-    //     // check if val is first element
-    //     if let Some(node) = &mut self.start 
-    //         && node.value == *val {
-    //         self.start = node.next_node.take();
-    //         self.size -= 1;
-    //         return;
-    //     }
-    
-    //     let mut current = &mut self.start;
-    //     while let Some(node) = current {
-    //         if let Some(next) = node.next_node.as_ref() {
-    //             if next.value == *val {
-    //                 let removed = node.next_node.take().unwrap();
-    //                 node.next_node = removed.next_node;
-    //                 self.size -= 1;
-    //                 return;
-    //             } 
-    //         } 
-    //         current = &mut node.next_node;
-    //     }
+    pub fn remove_value(&mut self, val: &T) {
+        if self.size == 0 {
+            println!("List is empty.");
+            return;
+        }
 
-    //     println!("Value {} was not stored.", val);
-    // }
+        // check if val is first element
+        let mut current = self.start.as_ref().map(Rc::clone);
+        if current.as_ref().unwrap().borrow().value == *val 
+        {
+            current.as_ref().unwrap().borrow_mut().prev_node = None;
+            self.start = current.unwrap().borrow().next_node.clone();
+            self.size -= 1;
+            return;
+        }
+        
+        let mut prev = self.start.as_ref().map(Rc::clone);
+        current = prev.as_ref().unwrap().borrow_mut().next_node.clone();
+
+        while let Some(ref node) = current {
+            if node.borrow().value == *val {
+                // Update prev's next_node
+                if let Some(ref prev_rc) = prev {
+                    prev_rc.borrow_mut().next_node = node.borrow().next_node.as_ref().map(Rc::clone);
+                }
+                // Update next's prev_node
+                if let Some(ref next_rc) = node.borrow().next_node.as_ref().map(Rc::clone) {
+                    next_rc.borrow_mut().prev_node = prev.as_ref().map(Rc::downgrade);
+                }
+                self.size -= 1;
+                return;
+            }
+            prev = current.clone();
+            let next = node.borrow().next_node.as_ref().map(Rc::clone);
+            current = next;
+        }
+        
+        println!("Value {} was not stored.", val);
+    }
 
     pub fn print_all(&self) {
         if self.size == 0 {

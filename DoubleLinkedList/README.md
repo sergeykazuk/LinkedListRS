@@ -16,6 +16,7 @@ This project is a hands-on exercise to understand Rust’s ownership, borrowing,
 - O(1) insertion at the end of the list using a `Weak` pointer to the tail.
 - Forward and backward traversal with safe, idiomatic Rust patterns.
 - Extensive comments and experiments with `as_ref()`, `map(Rc::clone)`, `and_then`, and `unwrap()` to understand how to move between references, owned pointers, and options.
+- Removing nodes (especially in the middle) is a more advanced exercise, as it requires careful handling of `Rc` counts and pointer updates.
 
 ## Lessons Learned
 
@@ -24,13 +25,8 @@ This project is a hands-on exercise to understand Rust’s ownership, borrowing,
 - **Option and Unwrap**: Many fields are `Option` because nodes may be missing (start, end, next, prev). Using `unwrap()` can panic if you hit `None`, so prefer safe patterns like `map`, `and_then`, and `while let Some(...)`.
 - **Borrow Checker**: Rust’s borrow checker enforces safe access, so you must be careful not to hold borrows across mutations or assignments.
 
-## What’s Missing
-
-- **Element Removal**: Removing nodes (especially in the middle) is not yet implemented. This is a more advanced exercise, as it requires careful handling of `Rc` counts and pointer updates.
-
 ## Next Steps
 
-- Implement safe removal of elements.
 - Add more tests and edge case handling.
 - Continue experimenting with Rust’s ownership and borrowing patterns.
 
