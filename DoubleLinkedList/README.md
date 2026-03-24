@@ -10,6 +10,19 @@ This project is a hands-on exercise to understand Rust’s ownership, borrowing,
 - How to safely traverse and mutate a linked list using these types.
 - How to work with `Option` and avoid panics by not overusing `unwrap()`.
 
+
+## Accessing Elements: The `at` Function
+
+The `at` function provides access to the value at a given index in the list:
+
+```rust
+pub fn at(&self, index: usize) -> Option<T>
+```
+
+- Returns `Some(T)` if the index is valid, or `None` if out of bounds.
+- **Note:** This function returns a clone of the value at the given index. This is necessary because the list uses `Rc<RefCell<Node<T>>>` for shared, mutable nodes, and Rust's borrowing rules do not allow returning references to data inside a `RefCell`.
+- If cloning is expensive, consider a different data structure (e.g., `Vec` or arena allocation).
+
 ## What’s Implemented
 
 - A doubly linked list using `Rc<RefCell<Node<T>>>` for shared, mutable nodes.

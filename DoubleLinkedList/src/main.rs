@@ -16,4 +16,11 @@ fn main() {
     dl.remove_value(&45);
     dl.print_all();
 
+    dl.add_value(&15);
+    dl.add_value(&52);
+
+    dl.print_all();
+
+    let mut element_at = dl.at(3);
+    println!("Element at position 3: {}", element_at.unwrap_or(i16::MIN));
 }

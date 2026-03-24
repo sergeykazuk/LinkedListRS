@@ -19,6 +19,7 @@ pub struct DoubleLinkedList<T: PartialEq + Display + Clone> {
     end: Option<WeakNodePtr<T>>,
 }
 
+#[allow(dead_code)]
 impl<T: PartialEq + Display + Clone> DoubleLinkedList<T> {
 
     pub fn create() -> Self {
@@ -96,6 +97,24 @@ impl<T: PartialEq + Display + Clone> DoubleLinkedList<T> {
         }
         
         println!("Value {} was not stored.", val);
+    }
+
+    pub fn at(&self, index: usize) -> Option<T> {
+        if index >= self.size {
+            return None;
+        }
+
+        let mut i: usize = 0;
+        let mut current = self.start.as_ref().map(Rc::clone);
+
+        while let Some(node) = current {
+            if i == index {
+                return Some(node.borrow().value.clone());
+            }
+            current = node.borrow().next_node.as_ref().map(Rc::clone);
+            i += 1;
+        }
+        None
     }
 
     pub fn print_all(&self) {
