@@ -3,4 +3,8 @@ name = "DoubleLinkedList"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "double_linked_list"
+path = "src/double_linked_list.rs"
+
 [dependencies]
