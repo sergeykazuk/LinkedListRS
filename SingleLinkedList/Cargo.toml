@@ -5,4 +5,8 @@ edition = "2024"
 description = "An educational implementation of a singly linked list in Rust"
 license = "MIT"
 
+[lib]
+name = "single_linked_list"
+path = "src/single_linked_list.rs"
+
 [dependencies]

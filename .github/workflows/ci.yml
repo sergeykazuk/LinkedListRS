@@ -24,6 +24,11 @@ jobs:
           cd SingleLinkedList
           cargo build --verbose
 
+      - name: Test SingleLinkedList
+        run: |
+          cd SingleLinkedList
+          cargo test --verbose
+
       - name: Build DoubleLinkedList
         run: |
           cd DoubleLinkedList

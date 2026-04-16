@@ -4,6 +4,8 @@
 mod tests {
     #[cfg(test)]
     use double_linked_list::DoubleLinkedList;
+
+    #[test]
     fn test_add_and_at() {
         let mut list = DoubleLinkedList::create();
         list.add_value(&1);

@@ -9,13 +9,23 @@ fn main() {
     ll.print_all();
 
     println!("\nAdding values...");
-    ll.add_value(&14);
-    ll.add_value(&25);
-    ll.add_value(&32);
-    ll.add_value(&59);
+    ll.push_back(&14);
+    ll.push_back(&25);
+    ll.push_back(&32);
+    ll.push_back(&59);
+    ll.push_back(&88);
 
-    ll.print_all();
     println!("List size: {}\n", ll.size());
+    ll.print_all();
+
+    println!("Popping...");
+    ll.pop_back();
+    ll.pop_front();
+    println!("List size: {}\n", ll.size());
+    ll.print_all();
+
+    ll.push_back(&31);
+    ll.push_front(&17);
 
     println!("Removing some values...");
     ll.remove_value(&1);
@@ -29,6 +39,10 @@ fn main() {
     ll.print_all();
 
     ll.remove_value(&59);
+
+    ll.print_all();
+
+    ll.push_front(&99);
 
     ll.print_all();
 
